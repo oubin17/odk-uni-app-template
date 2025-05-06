@@ -1,16 +1,82 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
 		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "uni-app"
 			}
+		},
+		{
+			"path": "pages/ask/ask",
+			"style": {
+				"navigationBarTitleText": "ask"
+			}
+		},
+    {
+			"path": "pages/mid/mid",
+			"style": {
+				"navigationBarTitleText": "mid"
+			}
+		},
+    {
+			"path": "pages/msg/msg",
+			"style": {
+				"navigationBarTitleText": "msg"
+			}
+		},
+    {
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "my"
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "默认文案",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+    // "navigationStyle": "custom",是否自定义导航栏
+
+    
+	},
+  
+	"tabBar": {
+		"color": "#515151",
+		"selectedColor": "#2c2c2c",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/normal/home.png",
+				"selectedIconPath": "static/selected/home.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/ask/ask",
+				"iconPath": "static/normal/ask.png",
+				"selectedIconPath": "static/selected/ask.png",
+				"text": "提问"
+			},
+			{
+				"pagePath": "pages/mid/mid",
+				"iconPath": "static/normal/mid.png",
+				"selectedIconPath": "static/selected/mid.png",
+				"text": "中间"
+			},
+			{
+				"pagePath": "pages/msg/msg",
+				"iconPath": "static/normal/msg.png",
+				"selectedIconPath": "static/selected/msg.png",
+				"text": "消息"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"iconPath": "static/normal/my.png",
+				"selectedIconPath": "static/selected/my.png",
+				"text": "我的"
+			}
+		]
 	}
 }
