@@ -36,7 +36,7 @@
 		"navigationBarTitleText": "默认文案",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
-    // "navigationStyle": "custom",是否自定义导航栏
+    "navigationStyle": "custom"
 
     
 	},

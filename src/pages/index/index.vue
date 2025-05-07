@@ -1,15 +1,12 @@
 <template>
+  <navbar title="首页" />
   <view class="content">
-    <image class="logo" src="/static/home.png" />
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
-    </view>
+    111
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-const title = ref('Hello')
+
 </script>
 
 <style>
