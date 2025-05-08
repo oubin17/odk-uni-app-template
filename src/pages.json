@@ -84,5 +84,12 @@
 				"text": "我的"
 			}
 		]
-	}
+	},
+  "easycom": {
+    "autoscan": true, 
+    "custom": {
+      "^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
+      "^up-(.*)": "uview-plus/components/u-$1/u-$1.vue"
+    }
+  }
 }

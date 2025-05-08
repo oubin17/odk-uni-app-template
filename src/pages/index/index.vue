@@ -6,6 +6,7 @@
   <button @click="toSearch">
     按钮
   </button>
+  <up-button type="primary" @click="showToast">点击测试</up-button>
 </template>
 
 <script setup lang="ts">
@@ -13,6 +14,10 @@ const toSearch = () => {
   uni.navigateTo({
     url: '/pages/search/index'
   })
+}
+
+const showToast = () => {
+  console.log('点击了')
 }
 </script>
 
