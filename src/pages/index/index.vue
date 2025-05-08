@@ -3,10 +3,17 @@
   <view class="content">
     111
   </view>
+  <button @click="toSearch">
+    按钮
+  </button>
 </template>
 
 <script setup lang="ts">
-
+const toSearch = () => {
+  uni.navigateTo({
+    url: '/pages/search/index'
+  })
+}
 </script>
 
 <style>

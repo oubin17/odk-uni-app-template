@@ -29,6 +29,12 @@
 			"style": {
 				"navigationBarTitleText": "my"
 			}
+		},
+        {
+			"path": "pages/search/index",
+			"style": {
+				"navigationBarTitleText": "search"
+			}
 		}
 	],
 	"globalStyle": {

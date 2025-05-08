@@ -1,7 +1,12 @@
 <template>
   <view class="nav">
     <view :style="{ height: statusBarHeight + 'rpx', background: props.background }"></view>
-    <view :style="{ height: navbarHeight + 'rpx', color: props.color }" class="navbar"></view>
+    <view :style="{ height: navbarHeight + 'rpx', color: props.color }" class="navbar">
+      <view class="back-icon" @click="handleBackClick">
+        <image v-if="pageStacks > 1" src="../../static/back.png"></image>
+        <image v-else src="../../static/normal/home.png"></image>
+      </view>
+    </view>
 
   </view>
 
@@ -26,6 +31,10 @@ const props = defineProps({
     type: String,
     default: 32
   },
+  iconWidth: {
+    type: String,
+    default: 116
+  },
   iconHeight: {
     type: String,
     default: 38
@@ -49,6 +58,23 @@ const navbarHeight = computed(() => {
   return navbarHeight * 2
 })
 
+//页面栈数量
+const pageStacks = computed(() => {
+  const pageStacks = getCurrentPages()
+  return pageStacks.length
+})
+
+// 处理返回按钮点击
+const handleBackClick = () => {
+  if (pageStacks.value > 1) {
+    uni.navigateBack()
+  } else {
+    uni.switchTab({
+      url: '/pages/index/index'
+    })
+  }
+}
+
 </script>
 
 <style scoped>
@@ -58,5 +84,21 @@ const navbarHeight = computed(() => {
   top: 0;
   left: 0;
   z-index: 2;
+}
+
+.back-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+
+.back-icon image {
+  width: 40rpx;
+  height: 40rpx;
+  object-fit: contain;
 }
 </style>
