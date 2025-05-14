@@ -14,6 +14,11 @@
 
 /* 颜色变量 */
 @import 'uview-plus/theme.scss';
+
+@import "uview-plus/index.scss";
+// $u-primary: #ff0000; // 将主色调改为红色
+// $u-success: #00ff00; // 修改成功色
+
 /* 行为相关颜色 */
 $uni-color-primary: #007aff;
 $uni-color-success: #4cd964;
