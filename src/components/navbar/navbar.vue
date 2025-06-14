@@ -1,104 +1,98 @@
 <template>
-  <view class="nav">
-    <view :style="{ height: statusBarHeight + 'rpx', background: props.background }"></view>
-    <view :style="{ height: navbarHeight + 'rpx', color: props.color }" class="navbar">
-      <view class="back-icon" @click="handleBackClick">
-        <image v-if="pageStacks > 1" src="../../static/back.png"></image>
-        <image v-else src="../../static/normal/home.png"></image>
-      </view>
-    </view>
-
+  <view class="navbar-container" :style="navbarStyle">
+    <up-navbar :safeAreaInsetTop="true" :title="props.title" @rightClick="rightClick" :autoBack="true">
+    </up-navbar>
   </view>
-
+  <!-- 提供一个占位元素，高度等于导航栏高度，确保内容不被遮挡 -->
+  <view class="navbar-placeholder" :style="placeholderStyle"></view>
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeMount } from 'vue'
+import { ref, onMounted, computed } from 'vue';
 
 const props = defineProps({
   //背景颜色
-  background: {
+  title: {
     type: String,
-    default: 'rgba(255,255,255,1)'
+    default: '默认页'
   },
-  //字体颜色
-  color: {
-    type: String,
-    default: 'rgba(0,0,0,1)'
-  },
-  //字体大小
-  fontSize: {
-    type: String,
-    default: "32"
-  },
-  iconWidth: {
-    type: String,
-    default: "116"
-  },
-  iconHeight: {
-    type: String,
-    default: "38"
-  },
-})
-const system = computed(() => {
-  const { system } = uni.getSystemInfoSync()
-  return system
-})
+});
 
-// 计算状态栏高度
-const statusBarHeight = computed(() => {
-  const statusBarHeight = uni.getWindowInfo()
-  return statusBarHeight.statusBarHeight * 2
-})
+// 定义状态栏高度和导航栏高度
+const statusBarHeight = ref(0);
+const navbarHeight = ref(0);
+const platform = ref('');
+const totalHeight = ref(0);
 
-// 计算导航栏高度
-const navbarHeight = computed(() => {
-  const isiOS = system.value.indexOf('iOS') > -1
-  const navbarHeight = isiOS ? 44 : 48
-  return navbarHeight * 2
-})
+// 计算导航栏样式
+const navbarStyle = computed(() => {
+  return {
+    paddingTop: `${statusBarHeight.value}rpx`,
+    height: `${navbarHeight.value}rpx`,
+  };
+});
 
-//页面栈数量
-const pageStacks = computed(() => {
-  const pageStacks = getCurrentPages()
-  return pageStacks.length
-})
+// 计算占位元素样式
+const placeholderStyle = computed(() => {
+  return {
+    height: `${totalHeight.value}rpx`
+  };
+});
 
-// 处理返回按钮点击
-const handleBackClick = () => {
-  if (pageStacks.value > 1) {
-    uni.navigateBack()
-  } else {
-    uni.switchTab({
-      url: '/pages/index/index'
-    })
+// 在组件挂载时获取系统信息
+onMounted(() => {
+  try {
+    // 获取系统信息
+    const systemInfo = uni.getSystemInfoSync();
+    // 状态栏高度（px转换为rpx）
+    statusBarHeight.value = (systemInfo?.statusBarHeight || 0) * 2; // px转rpx，一般是2倍关系
+    // 获取平台信息
+    platform.value = systemInfo.platform;
+
+    // 根据平台设置导航栏高度
+    if (platform.value === 'android') {
+      navbarHeight.value = 90; // 安卓导航栏高度
+    } else if (platform.value === 'ios') {
+      navbarHeight.value = 88; // iOS导航栏高度
+    } else {
+      navbarHeight.value = 88; // 默认导航栏高度
+    }
+
+    // 计算总高度
+    totalHeight.value = statusBarHeight.value + navbarHeight.value;
+
+    console.log('平台:', platform.value);
+    console.log('状态栏高度:', statusBarHeight.value, 'rpx');
+    console.log('导航栏高度:', navbarHeight.value, 'rpx');
+    console.log('总高度:', totalHeight.value, 'rpx');
+  } catch (e) {
+    console.error('获取系统信息失败:', e);
+    // 设置默认值
+    navbarHeight.value = 88;
+    totalHeight.value = 88;
   }
-}
+});
 
+// 定义方法  
+const rightClick = () => {
+  console.log('rightClick');
+};
+
+const leftClick = () => {
+  console.log('leftClick');
+};
 </script>
 
 <style scoped>
-.nav {
-  display: fixed;
-  width: 100%;
+.navbar-container {
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  right: 0;
+  z-index: 999;
 }
 
-.back-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80rpx;
-  height: 80rpx;
-  margin-left: 20rpx;
-  margin-top: 10rpx;
-}
-
-.back-icon image {
-  width: 40rpx;
-  height: 40rpx;
-  object-fit: contain;
+.navbar-placeholder {
+  width: 100%;
 }
 </style>

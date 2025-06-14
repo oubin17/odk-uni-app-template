@@ -1,5 +1,5 @@
 <template>
-  <navbar title="首页" />
+  <customernavbar title="首页" />
   <view class="content">
     111
   </view>
