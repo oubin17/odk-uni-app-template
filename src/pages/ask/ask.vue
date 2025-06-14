@@ -6,10 +6,18 @@
     </view>
 
   </view>
+  <button @click="toSearch">
+    按钮
+  </button>
 </template>
 
 <script setup lang="ts">
-// 不需要额外的脚本，navbar组件已经处理了高度计算
+
+const toSearch = () => {
+  uni.navigateTo({
+    url: '/pages/search/index'
+  })
+}
 </script>
 
 <style scoped>

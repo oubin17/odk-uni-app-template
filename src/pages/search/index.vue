@@ -1,5 +1,5 @@
 <template>
-  <customernavbar title="搜索页" />
+  <navbar title="搜索页" />
 </template>
 
 <script setup lang="ts">
